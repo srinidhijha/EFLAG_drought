@@ -1,3 +1,5 @@
+#This code takea UKCP18 1km data and provides mean per EFLAG catchment
+
 import sys
 import netCDF4 as nc
 import geopandas as gpd
@@ -13,12 +15,10 @@ import re
 def main(station_number):
     # Define the coordinate reference system (CRS) for the data
     osgb36 = "EPSG:27700"
-
     # Load the catchment shapefile
     sf = gpd.read_file("~/NC_intl/other_work/data/shapefiles/nrfa_all_catchments.shp", crs=osgb36)
     # Extract the station IDs from the shapefile
     sf_id = sf["STATION"].values
-
     # Read the eflag catchment eflag station IDs from Excel
     eflag_id = pd.read_excel("~/NC_intl/other_work/data/eFLaG_Station_Metadata.xlsx", sheet_name="River Flow")
     station_names = eflag_id["NAME"].values
